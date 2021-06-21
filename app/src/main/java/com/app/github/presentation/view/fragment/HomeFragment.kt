@@ -1,18 +1,32 @@
 package com.app.github.presentation.view.fragment
 
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.app.github.R
+import com.app.github.core.base.BaseFragment
+import com.app.github.databinding.ViewFragmentHomeBinding
+import com.app.github.presentation.viewmodel.HomeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-class HomeFragment : Fragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.view_fragment_home, container, false)
+@AndroidEntryPoint
+class HomeFragment : BaseFragment<ViewFragmentHomeBinding, HomeViewModel>() {
+
+    override fun getContentView(): Int {
+        return R.layout.view_fragment_home
+    }
+
+    override fun getViewModel(): Class<HomeViewModel> {
+        return HomeViewModel::class.java
+    }
+
+    override fun subScribe(view: View) {
+        super.subScribe(view)
+
+        baseViewModel.resultModel.observe(viewLifecycleOwner, {
+            it.let {
+                println(it.size)
+            }
+
+        })
+
     }
 }

@@ -1,21 +1,36 @@
 package com.app.github.presentation.view.fragment
 
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import com.app.github.R
+import com.app.github.core.base.BaseFragment
+import com.app.github.databinding.ViewFragmentDetailBinding
+import com.app.github.presentation.viewmodel.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DetailFragment : Fragment() {
+class DetailFragment : BaseFragment<ViewFragmentDetailBinding, DetailViewModel>() {
+    private val args: DetailFragmentArgs by navArgs()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.view_fragment_detail, container, false)
+    override fun getContentView(): Int {
+        return R.layout.view_fragment_detail
+    }
+
+    override fun getViewModel(): Class<DetailViewModel> {
+        return DetailViewModel::class.java
+    }
+
+    override fun subScribe(view: View) {
+        super.subScribe(view)
+        init()
+        dataBinding.detailModel = args.model
+    }
+
+    private fun init() {
+        dataBinding.imgBack.setOnClickListener {
+            val action = DetailFragmentDirections.actionDetailFragmentToHomeFragment()
+            Navigation.findNavController(it).navigate(action)
+        }
     }
 }

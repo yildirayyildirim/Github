@@ -50,7 +50,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showChangeProgress()
+        subScribe(view)
     }
 
     open fun hideProgressDialog() {

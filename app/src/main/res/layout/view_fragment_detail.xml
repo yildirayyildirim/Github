@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <variable
+            name="detailModel"
+            type="com.app.github.presentation.model.GithubModelItem" />
     </data>
 
     <FrameLayout
@@ -11,11 +15,93 @@
         android:layout_height="match_parent"
         tools:context=".presentation.view.fragment.DetailFragment">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/purple_500"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/imgBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:src="@drawable/ic_back" />
+
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@{detailModel.name}"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/imgStars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:src="@drawable/ic_stars_none" />
+
+
+        </FrameLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ownerGroup"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:layout_marginTop="51dp"
+            android:background="#0D1117"
+            android:padding="20dp">
+
+            <ImageView
+                android:id="@+id/imgAvatar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@mipmap/ic_launcher"
+                app:imagePath="@{detailModel.owner.avatar_url}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtOwner"
+                android:layout_width="0dp"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                android:layout_height="wrap_content"
+                android:text="@{detailModel.owner.login}"
+                android:layout_marginLeft="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imgAvatar"
+                app:layout_constraintTop_toTopOf="@+id/imgAvatar"
+                android:layout_marginStart="30dp" />
+
+            <TextView
+                android:id="@+id/txtStarsCount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/white"
+                android:text="@{detailModel.starCountString}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgAvatar" />
+
+            <TextView
+                android:id="@+id/txtIssues"
+                android:layout_width="0dp"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"
+                android:text="@{detailModel.issuesString}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtStarsCount" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>
+
+
 </layout>

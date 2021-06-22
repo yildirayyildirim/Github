@@ -16,14 +16,10 @@ constructor(private val repository: GithubRepository) : BaseViewModel() {
 
     val resultModel = MutableLiveData<GithubModel>()
 
-    init {
-        getAllDiscover()
-    }
-
-    private fun getAllDiscover() =
+    fun getGithubInformationByUsername(username: String) =
         viewModelScope.launch {
             getIsLoading().postValue(true)
-            repository.getGithubInformationByUsername("yildirayyildirim")
+            repository.getGithubInformationByUsername(username)
                 .let { response ->
                     if (response.isSuccessful) {
                         resultModel.postValue(response.body())

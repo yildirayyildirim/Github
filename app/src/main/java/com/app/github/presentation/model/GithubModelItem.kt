@@ -1,5 +1,7 @@
 package com.app.github.presentation.model
 
+import java.io.Serializable
+
 data class GithubModelItem(
     val archive_url: String,
     val archived: Boolean,
@@ -52,8 +54,8 @@ data class GithubModelItem(
     val name: String,
     val node_id: String,
     val notifications_url: String,
-    val open_issues: Int,
-    val open_issues_count: Int,
+    private val open_issues: Int,
+    private val open_issues_count: Int,
     val owner: Owner,
     val `private`: Boolean,
     val pulls_url: String,
@@ -74,4 +76,14 @@ data class GithubModelItem(
     val url: String,
     val watchers: Int,
     val watchers_count: Int
-)
+) : Serializable{
+    val issuesString: String
+        get() {
+            return "Open Issues : $open_issues"
+        }
+
+    val starCountString: String
+        get() {
+            return "Stars : $stargazers_count"
+        }
+}

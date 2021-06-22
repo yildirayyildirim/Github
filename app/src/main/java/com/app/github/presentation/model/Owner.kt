@@ -1,5 +1,7 @@
 package com.app.github.presentation.model
 
+import java.io.Serializable
+
 data class Owner(
     val avatar_url: String,
     val events_url: String,
@@ -19,4 +21,4 @@ data class Owner(
     val subscriptions_url: String,
     val type: String,
     val url: String
-)
+) :Serializable

@@ -1,7 +1,11 @@
 package com.app.github.core.di
 
+import android.app.Application
+import androidx.room.Room
 import com.app.github.BuildConfig
 import com.app.github.core.helper.Constants
+import com.app.github.core.persistence.AppDatabase
+import com.app.github.core.persistence.dao.BookmarkDao
 import com.app.github.core.repository.IGithubService
 import dagger.Module
 import dagger.Provides
@@ -37,4 +41,22 @@ object AppModule {
             .build()
             .create(IGithubService::class.java)
 
+
+
+    @Provides
+    @Singleton
+    fun provideAppDatabase(
+        application: Application,
+    ): AppDatabase {
+        return Room
+            .databaseBuilder(application, AppDatabase::class.java, "github.db")
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun providePokemonDao(appDatabase: AppDatabase): BookmarkDao {
+        return appDatabase.wordDao()
+    }
 }

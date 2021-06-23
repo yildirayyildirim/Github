@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="isFavorite"
+            type="java.lang.Boolean" />
+
+        <variable
             name="detailModel"
             type="com.app.github.presentation.model.GithubModelItem" />
     </data>
@@ -42,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:src="@drawable/ic_stars_none" />
+                android:src="@{isFavorite ? @drawable/ic_stars : @drawable/ic_stars_none}" />
 
 
         </FrameLayout>
@@ -67,23 +71,23 @@
             <TextView
                 android:id="@+id/txtOwner"
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginLeft="30dp"
+                android:text="@{detailModel.owner.login}"
                 android:textColor="@color/white"
                 android:textSize="28sp"
-                android:layout_height="wrap_content"
-                android:text="@{detailModel.owner.login}"
-                android:layout_marginLeft="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imgAvatar"
-                app:layout_constraintTop_toTopOf="@+id/imgAvatar"
-                android:layout_marginStart="30dp" />
+                app:layout_constraintTop_toTopOf="@+id/imgAvatar" />
 
             <TextView
                 android:id="@+id/txtStarsCount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:textColor="@color/white"
                 android:text="@{detailModel.starCountString}"
+                android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imgAvatar" />
@@ -91,9 +95,9 @@
             <TextView
                 android:id="@+id/txtIssues"
                 android:layout_width="0dp"
-                android:textColor="@color/white"
                 android:layout_height="wrap_content"
                 android:text="@{detailModel.issuesString}"
+                android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtStarsCount" />

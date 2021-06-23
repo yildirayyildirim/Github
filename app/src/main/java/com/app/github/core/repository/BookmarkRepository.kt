@@ -11,7 +11,18 @@ class BookmarkRepository
 @Inject
 constructor(private val bookmarkDao: BookmarkDao) {
 
-    fun getAllBookmark(): LiveData<List<BookmarkEntity>> {
-        return bookmarkDao.getAllBookmark();
+    val getAllBookmark: LiveData<List<BookmarkEntity>> = bookmarkDao.getAllBookmark()
+
+    fun getBookmarkEntityById(id: Int): LiveData<BookmarkEntity> {
+        return bookmarkDao.getBookmarkById(id)
     }
+
+    suspend fun insert(bookmarkEntity: BookmarkEntity) {
+        bookmarkDao.insert(bookmarkEntity)
+    }
+
+    suspend fun delete(bookmarkEntity: BookmarkEntity) {
+        bookmarkDao.delete(bookmarkEntity)
+    }
+
 }

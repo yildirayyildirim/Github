@@ -1,11 +1,13 @@
 package com.app.github.core.persistence.entity
 
+import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "Bookmark")
 data class BookmarkEntity(
+    @NonNull
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "ID") var id: Int,
     @ColumnInfo(name = "AVATAR_URL") var avatarUrl: String?,
